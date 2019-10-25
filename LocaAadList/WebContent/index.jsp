@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Enter Details</h1>
-<form action="/details.do" method="post">
+<form action="details.do" method="post">
 	Name:<input type="text" name="name"><br><br>
 	Email:<input type="text" name="email"><br><br>
 	Phone:<input type="text" name="phone"><br><br>

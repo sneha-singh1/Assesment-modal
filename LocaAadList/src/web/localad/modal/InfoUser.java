@@ -1,6 +1,7 @@
 package web.localad.modal;
 
 public class InfoUser {
+	private int id;
 private String name;
 private String email;
 private String phone;
@@ -9,13 +10,12 @@ private String postalcode;
 private String description;
 private String postingtitle;
 
-public InfoUser(){
 
-}
 
-public InfoUser(String name, String email, String phone, String city, String postalcode, String description,
+public InfoUser(String name, int id,String email, String phone, String city, String postalcode, String description,
 		String postingtitle) {
 	super();
+	this.id=id;
 	this.name = name;
 	this.email = email;
 	this.phone = phone;
@@ -79,6 +79,14 @@ public String getPostingtitle() {
 
 public void setPostingtitle(String postingtitle) {
 	this.postingtitle = postingtitle;
+}
+
+public int getId() {
+	return id;
+}
+
+public void setId(int id) {
+	this.id = id;
 }
 
 

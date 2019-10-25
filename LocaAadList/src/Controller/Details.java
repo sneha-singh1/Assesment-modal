@@ -44,20 +44,18 @@ public class Details extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		MongoClient connection = ConnectionManager.getMongo();
-		MongoDatabase db = ConnectionManager.getDb("Info");
-		MongoCollection<Document> collection = db.getCollection("details");
-		MongoCursor<Document> cursor = null;
+
+		MongoCursor<Document> cursor ;
 		cursor = collection.find().iterator();
 		
-		List<Detail> dataList = new LinkedList<>();
+		List<InfoUser> dataList = new LinkedList<>();
 
 		while (cursor.hasNext()) {
 			Document d = (Document) cursor.next();
 
-		InfoUser data = new InfoUser(d.getString("name"), d.getString("email"), d.getString("phone"), d.getString("city"), d.getString("postalcode"),
+		InfoUser data = new InfoUser(d.getString("name"),d.getInteger("id"), d.getString("email"), d.getString("phone"), d.getString("city"), d.getString("postalcode"),
 					d.getString("description"), d.getString("postingtitle"));
-			dataList.add((Detail) data);
+			dataList.add( data);
 		}
 		request.setAttribute("list", dataList);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
