@@ -9,14 +9,14 @@
 <body>
 <h1>Enter Details</h1>
 <form action="/details.do" method="post">
-Name:<input type="text" name="name"><br><br>
-Email:<input type="text" name="email"><br><br>
-Phone:<input type="text" name="phone"><br><br>
-Posting title:<input type="text" name="postingtitle"><br><br>
-City or Neighborhood:<input type="text" name="city"><br><br>
-Postal Code:<input type="text" name="postalcode"><br><br>
-Description:<textarea rows="4" name="description"></textarea>
-		<button type="submit">Continue</button>
+	Name:<input type="text" name="name"><br><br>
+	Email:<input type="text" name="email"><br><br>
+	Phone:<input type="text" name="phone"><br><br>
+	Posting title:<input type="text" name="postingtitle"><br><br>
+	City or Neighborhood:<input type="text" name="city"><br><br>
+	Postal Code:<input type="text" name="postalcode"><br><br>
+	Description:<textarea rows="4" name="description"></textarea>
+			<button type="submit">Continue</button>
 </form>
 </body>
 </html>

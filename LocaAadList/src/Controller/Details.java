@@ -43,20 +43,13 @@ public class Details extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		MongoClient connection = ConnectionManager.getMongo();
 		MongoDatabase db = ConnectionManager.getDb("Info");
 		MongoCollection<Document> collection = db.getCollection("details");
 		MongoCursor<Document> cursor = null;
+		cursor = collection.find().iterator();
+		
 		List<Detail> dataList = new LinkedList<>();
 
 		while (cursor.hasNext()) {
@@ -68,6 +61,41 @@ public class Details extends HttpServlet {
 		}
 		request.setAttribute("list", dataList);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//doGet(request, response);
+		int c = 0;
+		int c1 = 0;
+		int id, idi = 0;
+		MongoCursor<Document> cursor = collection.find().iterator();
+		while (cursor.hasNext()) {
+			Document doc = (Document) cursor.next();
+			idi = doc.getInteger("Advertisement id");
+			c++;
+		}
+		if (c != 0) {
+			id = idi;
+		} else {
+			id = 100;
+		}
+		String tit = request.getParameter("name");
+		String city = request.getParameter("city");
+		String phone = request.getParameter("phone");
+		int postal = Integer.parseInt(request.getParameter("postalcode"));
+		String desc = request.getParameter("description");
+		String email = request.getParameter("email");
+		Document document = new Document("Advertisement ID", id + 1).append("name", tit).append("city", city)
+				.append("phone", phone).append("postalcode", postal).append("description", desc).append("email", email);
+		collection.insertOne(document);
+		c1++;
+		request.setAttribute("counter", c1);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+		ConnectionManager.close();
 	}
 
 }
